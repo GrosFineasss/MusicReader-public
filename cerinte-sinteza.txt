@@ -1,0 +1,45 @@
+# Mediul de sinteza — Smashcima. NU e `.venv`-ul proiectului.
+#
+# De ce doua medii (PROJECT.md §15.14): `albumentations`, dependinta lui
+# Smashcima, trage `stringzilla`, care n-are wheel pentru Python 3.14 si cere
+# compilator C++. Un Python 3.12 adus de `uv` e blocat de Smart App Control
+# (§15.13). Deci: Python-ul de sistem 3.14, Smashcima fara dependinte, si
+# dependintele reale scrise aici.
+#
+# Lista asta a lipsit o data (§15.34) si mediul a trebuit reconstruit prin
+# incercari. A doua oara nu mai trebuie.
+#
+#   py -m venv .venv-sinteza
+#   .venv-sinteza/Scripts/python.exe -m pip install smashcima==1.1.2 --no-deps
+#   .venv-sinteza/Scripts/python.exe -m pip install -r cerinte-sinteza.txt
+#
+# Se verifica cu o generare mica:
+#   .venv-sinteza/Scripts/python.exe scripts/sintetic.py \
+#       --ref data/validation/transpuse/pagina3-t-1.musicxml \
+#       --glife models/glife-fineas.pkl --out <undeva> --per-stil 1
+
+# Smashcima insasi NU e in lista dinadins: data lui `-r`, pip i-ar rezolva
+# dependintele si ar ajunge inapoi la `stringzilla`. Se instaleaza inainte,
+# cu --no-deps, exact cum scrie mai sus.
+
+# Dependintele reale ale lui Smashcima, fara `albumentations`.
+# Verificat pe 03.09.2026: randarea merge si fara ea. Daca vreodata nu mai
+# merge, `albumentations` se instaleaza tot cu --no-deps, si i se adauga
+# dependintele *ei* una cate una — dar nu `stringzilla`.
+augraphy==8.2.6
+mung==1.2.1
+muscima==0.10.0
+nameof==0.0.1
+numpy==2.5.2
+opencv-contrib-python==5.0.0.93
+punq==0.8.0
+requests==2.34.2
+scikit-image==0.26.0
+tqdm==4.70.0
+
+# scipy pinuit dinadins: pe 1.18 Smart App Control blocheaza `_arpacklib`
+# (§15.25). Aceeasi versiune ca in `.venv`.
+scipy==1.17.1
+
+# A noastra, nu a lui Smashcima: `sintetic.py` imparte referinta pe sisteme.
+music21==10.5.0

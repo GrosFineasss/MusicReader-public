@@ -1,0 +1,50 @@
+[project]
+name = "omr-cor"
+version = "0.1.0"
+description = "OMR local pentru partituri de cor scrise de mana, cu iesire MusicXML"
+requires-python = ">=3.11"
+
+# Nucleul determinist (music_model, musicxml, validation) nu depinde de nimic
+# in afara de biblioteca standard. Dependintele grele stau in extras, ca sa
+# putem rula testele de logica muzicala fara torch.
+dependencies = []
+
+[project.optional-dependencies]
+recognition = [
+  "torch",
+  "torchvision",
+  "transformers",
+  "safetensors",
+  "huggingface_hub",
+  "ultralytics",
+  "scikit-image",
+  "einops",
+  "gin-config",
+  "loguru",
+  "opencv-python-headless",
+  "numpy",
+  "pillow",
+]
+# Lotul are nevoie doar de citirea PDF-urilor; starea sta in `sqlite3`, din
+# biblioteca standard.
+batch = ["pypdfium2"]
+# PySide6 e LGPL, deci se poate folosi si intr-un produs comercial.
+ui = ["PySide6-Essentials"]
+conversion = ["music21"]
+dev = ["pytest"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+filterwarnings = ["error"]
+# Testele care ating modelul cer greutatile descarcate si minute doar ca sa-l
+# incarce. Se ruleaza explicit, cu `pytest -m slow`.
+addopts = "-m 'not slow'"
+markers = ["slow: are nevoie de greutatile modelului si de mult timp"]

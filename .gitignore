@@ -1,0 +1,74 @@
+# Mediu
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Greutati de model — se descarca, nu se versioneaza
+models/
+
+# Cod tert clonat; se reface cu git clone (vezi README)
+vendor/
+
+# Date: pozele si iesirile lor sunt mari si personale.
+# `data/validation/` face exceptie: setul de referinta e mic si trebuie sa fie
+# stabil intre rulari, altfel testele de regresie nu inseamna nimic.
+data/raw/
+data/processed/
+data/synthetic/
+!data/validation/
+
+# Log scris doar cand pornirea esueaza
+data/eroare-pornire.log
+.venv-vechi/
+
+# Generat de instalarea editabila (pip install -e)
+*.egg-info/
+
+# Foile de glife completate: scanuri personale, de zeci de MB. Foaia goala si
+# harta ei raman versionate — fara ele, o foaie completata nu se poate citi.
+data/glife/*/
+
+# Mediul de sinteza; se reface din cerinte-sinteza.txt (PROJECT.md §15.34)
+.venv-sinteza/
+
+# Date NonCommercial, doar pentru experimentul din PLAN-NOAPTE.md blocul F.
+# Nu intra in produs, nici prin greutati (PROJECT.md §3.6).
+data/nc-doar-experiment/
+
+# polish-scores: 117 pagini scanate, ~100 MB. Se reface cu scripts/polish.py.
+# CC-BY-NC ca JAZZMUS — masurare si diagnostic, nu produs (PROJECT.md §3.6).
+data/polish/
+
+# Coralele Bach randate: ~1.300 de decupaje. Se refac cu scripts/bach.py.
+# Editia din corpusul music21 are licenta neclara pentru uz comercial —
+# diagnostic, ca polish-scores (PROJECT.md §3.6).
+data/bach/
+
+# Al doilea lot Bach (sisteme dupa densitate, 150/200/300 dpi). Ca data/bach/.
+data/bach2/
+data/bach2-generare.log
+
+# PDMX (Zenodo 15571083): metadate si MusicXML, ~2 GB. CC0/domeniu public.
+data/pdmx/
+
+# Esantion GrandStaff (MIT) pentru amestec la antrenare. Se reface cu scripts/grandstaff.py.
+data/grandstaff/
+
+# PDMX randat si setul combinat al antrenarii 3. Se refac cu scripts/bach.py --lista si scripts/combina.py.
+data/pdmx-randat/
+data/antrenare-3/
+data/pdmx-acorduri/
+data/bach2-acorduri/
+data/bach2-acorduri.log
+data/bach2-redecupare.log
+data/antrenare-4/
+data/antrenare-5/
+# Paginile PDMX cu repetitii (scripts/bach.py --doar-repetitii, ramura repetitii) si setul antrenarii 6.
+data/pdmx-repetitii/
+data/pdmx-repetitii-acorduri/
+data/antrenare-6/
+# Paginile PDMX randate cu stilul „de mana" (scripts/bach-stil-mana.mss) si setul antrenarii 7.
+data/pdmx-mana/
+data/pdmx-mana-acorduri/
+data/antrenare-7/
